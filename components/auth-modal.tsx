@@ -7,7 +7,7 @@ import { X, ArrowRight } from "lucide-react"
 import SignupForm from "./signup-form"
 import PlanSelection from "./plan-selection"
 import FreemiumChat from "./freemium-chat"
-import ProPlanFlow from "./pro-plan-flow"
+import ProPlanFlow from "./pro-plan-modal"
 
 interface AuthModalProps {
   onClose: () => void
