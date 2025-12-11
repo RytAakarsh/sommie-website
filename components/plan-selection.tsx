@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { useLanguage } from "@/app/page"
+import { useLanguage } from "@/app/providers/LanguageProvider";
+
 import { Check, X, ArrowUpRight, Zap, Crown, Layers } from "lucide-react"
 import Image from "next/image"
 

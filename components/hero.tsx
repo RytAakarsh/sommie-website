@@ -1,6 +1,7 @@
 "use client"
 
-import { useLanguage } from "@/app/page"
+import { useLanguage } from "@/app/providers/LanguageProvider";
+
 import { ArrowRight } from "lucide-react"
 
 interface HeroProps {

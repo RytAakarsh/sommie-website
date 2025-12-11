@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { useLanguage } from "@/app/page"
+import { useLanguage } from "@/app/providers/LanguageProvider";
+
 import { Menu, X, Globe } from "lucide-react"
 
 interface NavbarProps {

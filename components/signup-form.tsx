@@ -2,7 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { useLanguage } from "@/app/page"
+import { useLanguage } from "@/app/providers/LanguageProvider";
+
 import { X, ArrowRight } from "lucide-react"
 
 interface SignupFormProps {

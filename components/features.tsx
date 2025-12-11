@@ -1,6 +1,6 @@
 "use client"
+import { useLanguage } from "@/app/providers/LanguageProvider";
 
-import { useLanguage } from "@/app/page"
 import { Sparkles, Wine, MapPin, TrendingUp } from "lucide-react"
 
 export default function Features() {

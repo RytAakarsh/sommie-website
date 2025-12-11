@@ -1,6 +1,7 @@
 "use client"
 
-import { useLanguage } from "@/app/page"
+import { useLanguage } from "@/app/providers/LanguageProvider";
+
 import { Star } from "lucide-react"
 
 export default function Recommendations() {
