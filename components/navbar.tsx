@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useLanguage } from "@/app/providers/LanguageProvider";
+import Image from "next/image";
 
 import { Menu, X, Globe } from "lucide-react"
 
@@ -17,10 +18,17 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50 animate-fade-in-down shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-2xl">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center flex-shrink-0">
+          {/* <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center flex-shrink-0">
             <span className="text-primary-foreground text-lg font-bold">S</span>
           </div>
-          <span className="gradient-text">Sommie</span>
+          <span className="gradient-text">Sommie</span> */}
+          <Image
+                        src="/sommie-logo.png"
+                        alt="Sommie"
+                        width={190}
+                        height={40}
+                        className="object-contain"
+                      />
         </div>
 
         {/* Desktop Menu */}
