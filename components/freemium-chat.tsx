@@ -506,25 +506,31 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect  } from "react";
 import Image from "next/image";
 import {
-  Send,
-  Plus,
-  Menu,
-  MessageSquarePlus,
-  Globe,
-  Sparkles,
-  Mic,
-  ArrowRight,
+   Send,
+   Plus,
+   Menu,
+   MessageSquarePlus,
+   Globe,
+   Sparkles,
+   Mic,
+   ArrowRight,
+   MoreVertical,
+   LayoutDashboard,
 } from "lucide-react";
 import { useLanguage } from "@/app/providers/LanguageProvider";
+import { useRouter } from "next/navigation";
 
 export default function FreemiumChat() {
   const { t, language, setLanguage } = useLanguage();
+  const router = useRouter();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const messages = [
     {
@@ -536,6 +542,17 @@ I'm an AI passionate about wines — I can answer questions, suggest pairings, s
   ];
 
   const CHAT_MAX_WIDTH = 1200;
+
+   useEffect(() => {
+     function handleClickOutside(e: MouseEvent) {
+       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+         setProfileMenuOpen(false);
+       }
+     }
+     document.addEventListener("mousedown", handleClickOutside);
+     return () => document.removeEventListener("mousedown", handleClickOutside);
+   }, []);
+
 
   const suggestions = [
     "Suggest a wine",
@@ -668,13 +685,31 @@ I'm an AI passionate about wines — I can answer questions, suggest pairings, s
   </div>
 
   {/* PROFILE */}
-  <div className="p-4 border-t flex items-center gap-3">
-    <Image src="/avatar.webp" width={44} height={44} alt="profile" className="rounded-full" />
-    <div>
-      <p className="font-semibold text-sm">Adela Parkson</p>
-      <p className="text-xs text-green-600">online</p>
-    </div>
-  </div>
+  <div className="relative p-4 border-t flex items-center justify-between" ref={menuRef}>
+            <div className="flex items-center gap-3">
+              <Image src="/avatar.webp" width={40} height={40} alt="profile" className="rounded-full" />
+              <div>
+                <p className="font-semibold text-sm">Adela Parkson</p>
+                <p className="text-xs text-green-600">online</p>
+              </div>
+            </div>
+
+            <button onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
+              <MoreVertical className="w-5 h-5" />
+            </button>
+
+            {profileMenuOpen && (
+              <div className="absolute right-4 bottom-14 bg-white border rounded-xl shadow-md w-40 overflow-hidden">
+                <button
+                 onClick={() => router.push("/free-dash")}
+                  className="flex items-center gap-2 w-full px-4 py-3 hover:bg-gray-50 text-sm"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  Dashboard
+                </button>
+              </div>
+            )}
+          </div>
 </aside>
 
 
@@ -741,3 +776,224 @@ I'm an AI passionate about wines — I can answer questions, suggest pairings, s
   );
 }
 
+// "use client";
+
+// import React, { useState, useRef, useEffect } from "react";
+// import Image from "next/image";
+// import {
+//   Send,
+//   Plus,
+//   Menu,
+//   MessageSquarePlus,
+//   Globe,
+//   Sparkles,
+//   Mic,
+//   ArrowRight,
+//   MoreVertical,
+//   LayoutDashboard,
+// } from "lucide-react";
+// import { useLanguage } from "@/app/providers/LanguageProvider";
+// import { useRouter } from "next/navigation";
+
+// export default function FreemiumChat() {
+//   const { language, setLanguage, t } = useLanguage();
+//   const router = useRouter();
+
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+//   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+//   const menuRef = useRef<HTMLDivElement>(null);
+
+//   const CHAT_MAX_WIDTH = 1200;
+
+//   // close profile menu on outside click
+//   useEffect(() => {
+//     function handleClickOutside(e: MouseEvent) {
+//       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+//         setProfileMenuOpen(false);
+//       }
+//     }
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
+
+//   const suggestions = [
+//     "Suggest a wine",
+//     "Harmonize a dish",
+//     "Learn more about wine",
+//     "Plan an itinerary",
+//   ];
+
+//   return (
+//     <div className="fixed inset-0 bg-[#FAF7FC] flex flex-col text-[#3A2A4A]">
+
+//       {/* ================= DESKTOP NAVBAR ================= */}
+//       <nav className="hidden md:flex h-[88px] bg-white shadow-sm px-8 items-center justify-between">
+//         <div className="flex items-center gap-5">
+//           <Image src="/pro-logo.png" width={170} height={49} alt="Sommie" />
+
+//           <button className="p-2 hover:bg-gray-100 rounded-full">
+//             <svg width="22" height="22" stroke="#7f488b" fill="none">
+//               <circle cx="11" cy="11" r="8" />
+//               <line x1="21" y1="21" x2="16.65" y2="16.65" />
+//             </svg>
+//           </button>
+
+//           <button className="p-2 hover:bg-gray-100 rounded-full">
+//             <svg width="22" height="22" stroke="#7f488b" fill="none">
+//               <rect x="3" y="4" width="18" height="16" rx="2" />
+//               <line x1="3" y1="10" x2="21" y2="10" />
+//             </svg>
+//           </button>
+//         </div>
+
+//         <div className="flex items-center gap-4">
+//           <button
+//             onClick={() => setLanguage(language === "en" ? "pt" : "en")}
+//             className="flex items-center gap-2"
+//           >
+//             <Globe className="w-5 h-5" />
+//             <span className="text-sm uppercase">{language}</span>
+//           </button>
+
+//           <button className="flex items-center gap-2 bg-[#7f488b] text-white px-5 py-2 rounded-full">
+//             <Sparkles className="w-4 h-4" />
+//             Upgrade to PRO
+//             <ArrowRight className="w-4 h-4" />
+//           </button>
+//         </div>
+//       </nav>
+
+//       {/* ================= MOBILE NAVBAR ================= */}
+//       <nav className="md:hidden h-[64px] bg-white shadow-sm px-4 flex items-center justify-between">
+//         <button onClick={() => setSidebarOpen(true)}>
+//           <Menu className="w-6 h-6" />
+//         </button>
+
+//         <div className="flex items-center gap-2">
+//           <Image src="/avatar.webp" width={28} height={28} alt="avatar" className="rounded-full" />
+//           <span className="font-semibold">Sommie</span>
+//         </div>
+
+//         <button onClick={() => setLanguage(language === "en" ? "pt" : "en")}>
+//           <Globe className="w-5 h-5" />
+//         </button>
+//       </nav>
+
+//       {/* ================= BACKDROP ================= */}
+//       {sidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black/30 z-40 md:hidden"
+//           onClick={() => setSidebarOpen(false)}
+//         />
+//       )}
+
+//       <div className="flex flex-1 overflow-hidden">
+
+//         {/* ================= SIDEBAR ================= */}
+//         <aside
+//           className={`bg-white border-r z-50 w-[320px]
+//             fixed md:static top-0 left-0 h-full
+//             transition-transform duration-300
+//             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+//             md:translate-x-0`}
+//         >
+//           {/* MOBILE SIDEBAR HEADER (NO GAP FIXED) */}
+//           <div className="md:hidden flex items-center gap-4 px-4 py-4 border-b">
+//             <Image src="/pro-logo.png" width={140} height={36} alt="logo" />
+//             <button className="p-2 hover:bg-gray-100 rounded-full">
+//               <svg width="22" height="22" stroke="#7f488b" fill="none">
+//                 <circle cx="11" cy="11" r="8" />
+//                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
+//               </svg>
+//             </button>
+//             <button className="p-2 hover:bg-gray-100 rounded-full">
+//               <svg width="22" height="22" stroke="#7f488b" fill="none">
+//                 <rect x="3" y="4" width="18" height="16" rx="2" />
+//                 <line x1="3" y1="10" x2="21" y2="10" />
+//               </svg>
+//             </button>
+//           </div>
+
+//           <div className="p-4 border-b">
+//             <button className="w-full bg-[#7f488b] text-white py-3 rounded-xl flex justify-center gap-2">
+//               <MessageSquarePlus className="w-4 h-4" />
+//               New Chat
+//             </button>
+//           </div>
+
+//           <div className="flex-1 flex flex-col items-center justify-center text-gray-400 text-sm">
+//             <p>No chats yet</p>
+//             <p className="text-xs">Start a new conversation</p>
+//           </div>
+
+//           {/* PROFILE + 3 DOT MENU */}
+//           <div className="relative p-4 border-t flex items-center justify-between" ref={menuRef}>
+//             <div className="flex items-center gap-3">
+//               <Image src="/avatar.webp" width={40} height={40} alt="profile" className="rounded-full" />
+//               <div>
+//                 <p className="font-semibold text-sm">Adela Parkson</p>
+//                 <p className="text-xs text-green-600">online</p>
+//               </div>
+//             </div>
+
+//             <button onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
+//               <MoreVertical className="w-5 h-5" />
+//             </button>
+
+//             {profileMenuOpen && (
+//               <div className="absolute right-4 bottom-14 bg-white border rounded-xl shadow-md w-40 overflow-hidden">
+//                 <button
+//                   onClick={() => router.push("/dashboard")}
+//                   className="flex items-center gap-2 w-full px-4 py-3 hover:bg-gray-50 text-sm"
+//                 >
+//                   <LayoutDashboard className="w-4 h-4" />
+//                   Dashboard
+//                 </button>
+//               </div>
+//             )}
+//           </div>
+//         </aside>
+
+//         {/* ================= CHAT AREA ================= */}
+//         <main className="flex-1 overflow-y-auto">
+//           <div className="mx-auto px-6 py-10" style={{ maxWidth: CHAT_MAX_WIDTH }}>
+//             <div className="text-center mb-10">
+//               <Image src="/avatar.webp" width={120} height={120} alt="Sommie" className="rounded-full mx-auto mb-4" />
+//               <h1 className="text-3xl md:text-5xl font-bold mb-3">
+//                 Hi, I'm Sommie,<br />your virtual sommelier!
+//               </h1>
+//               <p className="text-gray-600 max-w-3xl mx-auto">
+//                 I'm an AI passionate about wines — I can answer questions, suggest pairings,
+//                 share curiosities about grapes, regions, wineries, and recommend the best labels.
+//               </p>
+//             </div>
+
+//             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+//               {suggestions.map((s) => (
+//                 <button key={s} className="h-[52px] bg-[#F4E8FB] rounded-xl px-6 flex justify-between items-center">
+//                   <span>{s}</span>
+//                   <ArrowRight />
+//                 </button>
+//               ))}
+//             </div>
+
+//             <form className="sticky bottom-6">
+//               <div className="bg-white border rounded-3xl px-4 py-3 flex items-center gap-3 shadow">
+//                 <button className="p-3 rounded-full bg-[#F4E9FF]">
+//                   <Plus />
+//                 </button>
+//                 <button className="p-3 rounded-full bg-[#F4E9FF]">
+//                   <Mic />
+//                 </button>
+//                 <input className="flex-1 outline-none" placeholder="Ask me anything..." />
+//                 <button className="w-11 h-11 rounded-full bg-[#7f488b] text-white flex items-center justify-center">
+//                   <Send />
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </main>
+//       </div>
+//     </div>
+//   );
+// }
