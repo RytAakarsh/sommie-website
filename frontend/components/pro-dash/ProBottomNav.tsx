@@ -26,7 +26,7 @@ export default function ProBottomNav() {
   return (
     <nav className="fixed bottom-5 left-0 right-0 md:hidden z-50">
       <div className="max-w-md mx-auto px-2">
-        <div className="bg-gradient-to-r from-[#6D3fa6] to-[#6d3fa6] text-white flex justify-between rounded-full py-4 px-6 shadow-lg">
+        <div className="bg-gradient-to-r from-[#4B2B5F] to-[#4B2B5F] text-white flex justify-between rounded-full py-4 px-6 shadow-lg">
           <button className="flex-1 text-center">Home</button>
           <button className="flex-1 text-center">Cellar</button>
           <button className="flex-1 text-center">Chat</button>

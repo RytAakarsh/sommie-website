@@ -249,3 +249,10 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+.menu-item {
+  @apply flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-purple-50 transition text-slate-700 w-full;
+}
+.input {
+  @apply border rounded-lg px-4 py-3 text-sm;
+}
