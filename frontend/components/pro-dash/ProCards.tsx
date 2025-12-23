@@ -95,7 +95,13 @@ export default function ProCards() {
 
   return (
     <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card title="Wine Tourism Planning" value={3} subtitle="Trips Planned" icon="✈️" />
+      <Card
+       title="Wine Tourism Planning"
+       value={3}
+       subtitle="Trips Planned"
+       icon="✈️"
+       onClick={() => setView("chat")} // ✅ ADD THIS
+      />
       <Card title="Restaurant Sommelier" value="AI" subtitle="Pairing Guide" icon="🍽️" />
 
       {/* CELLAR */}

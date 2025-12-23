@@ -821,7 +821,11 @@ type ChatMessage = {
 
 
 
-export default function FreemiumChat() {
+export default function FreemiumChat({
+  hideUpgradeButton = false,
+}: {
+  hideUpgradeButton?: boolean;
+}) {
   const { language, setLanguage } = useLanguage();
   const router = useRouter();
 
@@ -879,7 +883,7 @@ useEffect(() => {
   };
 
   return (
-   <div className="fixed inset-0 bg-[#FAF7FC] flex flex-col z-50 text-[#3A2A4A]">
+   <div className="fixed inset-0 bg-[#FAF7FC] flex flex-col z-50">
 
       {/* DESKTOP NAVBAR */}
       <nav className="hidden md:flex w-full bg-white shadow-sm px-8 items-center justify-between h-[88px]">
@@ -914,11 +918,13 @@ useEffect(() => {
             </span>
           </button>
 
-          <button className="flex items-center gap-2 bg-[#7f488b] text-white px-5 py-2 rounded-full shadow-md">
-            <Sparkles className="w-4 h-4" />
-            <span className="font-semibold text-sm">Upgrade to PRO</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {!hideUpgradeButton && (
+            <button className="flex items-center gap-2 bg-[#7f488b] text-white px-5 py-2 rounded-full shadow-md">
+              <Sparkles className="w-4 h-4" />
+              <span className="font-semibold text-sm">Upgrade to PRO</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </nav>
 
@@ -1001,32 +1007,7 @@ useEffect(() => {
     <p className="text-xs mt-1">Start a new conversation</p>
   </div>
 
-  {/* PROFILE */}
-  {/* <div className="relative p-4 border-t flex items-center justify-between" ref={menuRef}>
-            <div className="flex items-center gap-3">
-              <Image src="/avatar.webp" width={40} height={40} alt="profile" className="rounded-full" />
-              <div>
-                <p className="font-semibold text-sm">Adela Parkson</p>
-                <p className="text-xs text-green-600">online</p>
-              </div>
-            </div>
-
-            <button onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
-              <MoreVertical className="w-5 h-5" />
-            </button>
-
-            {profileMenuOpen && (
-              <div className="absolute right-4 bottom-14 bg-white border rounded-xl shadow-md w-40 overflow-hidden">
-                <button
-                 onClick={() => router.push("/free-dash")}
-                  className="flex items-center gap-2 w-full px-4 py-3 hover:bg-gray-50 text-sm"
-                >
-                  <LayoutDashboard className="w-4 h-4" />
-                  Dashboard
-                </button>
-              </div>
-            )}
-          </div> */}
+ 
           {/* PROFILE */}
 <div
   className="relative p-4 border-t flex items-center justify-between"
