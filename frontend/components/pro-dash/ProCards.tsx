@@ -113,7 +113,13 @@ export default function ProCards() {
         onClick={() => setView("cellar")}
       />
 
-      <Card title="Benefits Club" value={2} subtitle="Available Coupons" icon="🎁" />
+      <Card
+        title="Benefits Club"
+        value={2}
+        subtitle="Available Coupons"
+        icon="🎁"
+        onClick={() => setView("benefits")}
+      />
       <Card title="Sommie Game" value="8,345" subtitle="Score" icon="🎮" />
       <Card title="Profile" value="Manage" subtitle="Personal" icon="👤" onClick={() => setView("profile")} />
     </section>

@@ -109,6 +109,7 @@ import ProProfilePage from "./ProProfilePage";
 import EditProfilePage from "./EditProfilePage";
 import ProChatPanel from "./chat/ProChatPanel";
 import { useProView } from "./ProViewContext";
+import BenefitsClubPage from "./BenefitsClubPage";
 
 export default function ProDashboardContent() {
   const { view } = useProView();
@@ -138,6 +139,7 @@ export default function ProDashboardContent() {
           {view === "profile" && <ProProfilePage />}
           {view === "edit-profile" && <EditProfilePage />}
           {view === "chat" && <ProChatPanel />}
+          {view === "benefits" && <BenefitsClubPage />}
 
         </main>
 
