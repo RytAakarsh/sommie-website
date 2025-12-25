@@ -110,6 +110,9 @@ import EditProfilePage from "./EditProfilePage";
 import ProChatPanel from "./chat/ProChatPanel";
 import { useProView } from "./ProViewContext";
 import BenefitsClubPage from "./BenefitsClubPage";
+import SommieGamePage from "./SommieGamePage";
+import WinePhysicalStoresPage from "./WinePhysicalStoresPage";
+import RestaurantPocketPage from "./RestaurantPocketPage";
 
 export default function ProDashboardContent() {
   const { view } = useProView();
@@ -140,6 +143,9 @@ export default function ProDashboardContent() {
           {view === "edit-profile" && <EditProfilePage />}
           {view === "chat" && <ProChatPanel />}
           {view === "benefits" && <BenefitsClubPage />}
+          {view === "game" && <SommieGamePage />}
+          {view === "wine-stores" && <WinePhysicalStoresPage />}
+          {view === "restaurant-pocket" && <RestaurantPocketPage />}
 
         </main>
 

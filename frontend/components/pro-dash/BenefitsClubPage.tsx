@@ -462,11 +462,11 @@ export default function BenefitsClubPage() {
                <Gift size={60} className="text-[#4B2B5F] md:hidden" />
                
                {/* Desktop Illustration */}
-               <div className="hidden md:block">
+               {/* <div className="hidden md:block">
                  <img src="/benefits/hero.png" alt="Hero" className="w-56" 
                       onError={(e) => (e.currentTarget.style.display = 'none')} />
                  <Gift size={120} className="text-[#4B2B5F]" />
-               </div>
+               </div> */}
 
                {/* Design Detail: The dark accent dot */}
                <div className="absolute bottom-2 right-4 w-6 h-6 bg-[#4B2B5F] rounded-full border-4 border-[#F4E8FB] md:hidden" />
@@ -488,16 +488,21 @@ export default function BenefitsClubPage() {
             title="Wine Physical Stores" 
             partners="12 Partners" 
             icon={<Store size={40} className="text-[#4B2B5F]" />}
+            onAccess={() => setView("wine-stores")}
           />
           <BenefitCard 
             title="Restaurants" 
             partners="88 Partners" 
-            icon={<Utensils size={40} className="text-[#4B2B5F]" />}
+            icon={<Utensils size={40} className="text-[#4B2B5F]"
+            onClick={() => setView("restaurant-pocket")}
+            />}
           />
           <BenefitCard 
             title="Sommie Game Rewards" 
             partners="7 Partners" 
-            icon={<Trophy size={40} className="text-[#4B2B5F]" />}
+            icon={<Trophy size={40} className="text-[#4B2B5F]"
+            onClick={() => setView("game")}
+            />}
           />
         </div>
       </div>
@@ -505,22 +510,82 @@ export default function BenefitsClubPage() {
   );
 }
 
-function BenefitCard({ title, partners, icon }: { title: string; partners: string; icon: React.ReactNode }) {
+// function BenefitCard({ title, partners, icon ,  onClick,  }: { title: string; partners: string; icon: React.ReactNode, onClick?: () => void; }) {
+//   return (
+//     <div className="relative bg-[#F4E8FB] rounded-2xl p-4 md:p-6 pt-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group" onClick={onClick}>
+//       <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-[#4B2B5F] text-white text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-md">
+//         {partners}
+//       </div>
+
+//       <div className="mb-3 h-16 md:h-24 flex items-center justify-center">
+//         {icon}
+//       </div>
+
+//       <h3 className="font-bold text-[#4B2B5F] text-xs md:text-lg mb-4 leading-tight h-8 md:h-12 flex items-center justify-center">
+//         {title}
+//       </h3>
+
+//       <button className="w-full bg-[#4B2B5F] hover:bg-[#361f44] text-white text-[10px] md:text-sm font-bold py-2 md:py-3 rounded-lg md:rounded-xl transition-colors" onClick={onClick}>
+//         Access category
+//       </button>
+//     </div>
+//   );
+// return (
+//     <button
+//       onClick={onClick}
+//       className="relative bg-[#F4E8FB] rounded-2xl p-4 md:p-6 pt-10 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
+//     >
+//       <div className="absolute top-2 right-2 bg-[#4B2B5F] text-white text-[10px] font-bold px-2 py-1 rounded-md">
+//         {partners}
+//       </div>
+
+//       <div className="mb-3 h-16 md:h-24 flex items-center justify-center">
+//         {icon}
+//       </div>
+
+//       <h3 className="font-bold text-[#4B2B5F] text-sm md:text-lg mb-4">
+//         {title}
+//       </h3>
+
+//       <span className="w-full bg-[#4B2B5F] text-white text-xs md:text-sm font-bold py-2 rounded-lg">
+//         Access category
+//       </span>
+//     </button>
+//   );
+// } 
+function BenefitCard({
+  title,
+  partners,
+  icon,
+  onAccess,
+}: {
+  title: string;
+  partners: string;
+  icon: React.ReactNode;
+  onAccess?: () => void;
+}) {
   return (
-    <div className="relative bg-[#F4E8FB] rounded-2xl p-4 md:p-6 pt-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group">
-      <div className="absolute top-2 right-2 md:top-3 md:right-3 bg-[#4B2B5F] text-white text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded-md">
+    <div className="relative bg-[#F4E8FB] rounded-2xl p-4 md:p-6 pt-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all">
+      
+      {/* Partner badge */}
+      <div className="absolute top-2 right-2 bg-[#4B2B5F] text-white text-[10px] font-bold px-2 py-1 rounded-md">
         {partners}
       </div>
 
-      <div className="mb-3 h-16 md:h-24 flex items-center justify-center">
+      {/* ICON (NO CLICK HERE) */}
+      <div className="mb-3 h-16 flex items-center justify-center">
         {icon}
       </div>
 
-      <h3 className="font-bold text-[#4B2B5F] text-xs md:text-lg mb-4 leading-tight h-8 md:h-12 flex items-center justify-center">
+      <h3 className="font-bold text-[#4B2B5F] text-sm md:text-lg mb-4">
         {title}
       </h3>
 
-      <button className="w-full bg-[#4B2B5F] hover:bg-[#361f44] text-white text-[10px] md:text-sm font-bold py-2 md:py-3 rounded-lg md:rounded-xl transition-colors">
+      {/* ✅ CLICK ONLY HERE */}
+      <button
+         onClick={onAccess}
+        className="w-full bg-[#4B2B5F] hover:bg-[#361f44] text-white text-xs md:text-sm font-bold py-2 rounded-lg transition"
+      >
         Access category
       </button>
     </div>

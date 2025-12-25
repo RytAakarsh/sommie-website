@@ -142,7 +142,10 @@ export type ProView =
   | "edit-profile"
   | "chat"
   | "cellar"
-  | "benefits"; // ✅ ADD
+  | "benefits" 
+  | "game"
+  | "wine-stores"
+  | "restaurant-pocket";
 
 interface ProViewContextType {
   view: ProView;
