@@ -102,7 +102,9 @@ export default function ProCards() {
        icon="✈️"
        onClick={() => setView("chat")} // ✅ ADD THIS
       />
-      <Card title="Restaurant Sommelier" value="AI" subtitle="Pairing Guide" icon="🍽️" />
+      <Card title="Restaurant Sommelier" value="AI" subtitle="Pairing Guide" icon="🍽️"
+      onClick={() => setView("restaurant-pocket")}
+      />
 
       {/* CELLAR */}
       <Card
@@ -120,7 +122,9 @@ export default function ProCards() {
         icon="🎁"
         onClick={() => setView("benefits")}
       />
-      <Card title="Sommie Game" value="8,345" subtitle="Score" icon="🎮" />
+      <Card title="Sommie Game" value="8,345" subtitle="Score" icon="🎮" 
+      onClick={() => setView("game")}
+      />
       <Card title="Profile" value="Manage" subtitle="Personal" icon="👤" onClick={() => setView("profile")} />
     </section>
   );

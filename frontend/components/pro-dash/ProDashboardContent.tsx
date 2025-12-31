@@ -109,6 +109,10 @@ import ProProfilePage from "./ProProfilePage";
 import EditProfilePage from "./EditProfilePage";
 import ProChatPanel from "./chat/ProChatPanel";
 import { useProView } from "./ProViewContext";
+import CellarPage from "./cellar/CellarPage";
+import AddWinePage from "./cellar/AddWinePage";
+import PreviewWinePage from "./cellar/PreviewWinePage";
+import ConfirmWinePage from "./cellar/ConfirmWinePage";
 import BenefitsClubPage from "./BenefitsClubPage";
 import SommieGamePage from "./SommieGamePage";
 import WinePhysicalStoresPage from "./WinePhysicalStoresPage";
@@ -142,6 +146,10 @@ export default function ProDashboardContent() {
           {view === "profile" && <ProProfilePage />}
           {view === "edit-profile" && <EditProfilePage />}
           {view === "chat" && <ProChatPanel />}
+          {view === "cellar" && <CellarPage />}
+          {view === "cellar-add" && <AddWinePage />}
+          {view === "cellar-preview" && <PreviewWinePage />}
+          {view === "cellar-confirm" && <ConfirmWinePage />}
           {view === "benefits" && <BenefitsClubPage />}
           {view === "game" && <SommieGamePage />}
           {view === "wine-stores" && <WinePhysicalStoresPage />}
